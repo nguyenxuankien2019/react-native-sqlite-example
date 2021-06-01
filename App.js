@@ -20,13 +20,12 @@ const HomeScreen = ({ }) => {
   const [data, setData] = React.useState([]);
 
    useEffect( () => {
-     console.log('render');
 try {
   var db =  SQLite.openDatabase({ name: 'Dictionary.db', createFromLocation: 1, location: 'Library' }, successCB, errorCB);
 
     db.transaction(function (tx) {
       tx.executeSql(`SELECT * FROM entries WHERE word LIKE '${vocab}%' LIMIT 0,100`, [], (tx, results) => {
-        console.log('results::', results.rows.raw());
+        // console.log('results::', results.rows.raw());
         setData(results.rows.raw())   
       });
     })
@@ -44,7 +43,7 @@ try {
     <View style={{ flex: 1, paddingVertical: 32  }}>
        <TextInput
         style={styles.input}
-        onChangeVocab={onChangeVocab}
+        onChangeText={onChangeVocab}
         value={vocab}
         placeholder="Search a word"
       />
